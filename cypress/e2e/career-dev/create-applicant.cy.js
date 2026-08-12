@@ -1,5 +1,9 @@
+const applicants = require('../../fixtures/applicants.json')
+
 describe('Pelamar Staff', () => {
-  it('sukses menambah pelamar lowongan staff', () => {
+
+  applicants.forEach((applicant) => {
+  it(`sukses menambah pelamar - ${applicant.nama}`, () => {
     cy.visit('/')
 // konfirmasi pelamar
     cy.contains('button', 'Saya Mengerti')
@@ -15,7 +19,7 @@ describe('Pelamar Staff', () => {
         .click()
     cy.url()
         .should('include', '/jobs/staff')
-    cy.get('#no_ktp').type('8234723811240098')
+    cy.get('#no_ktp').type(applicant.noKtp)
     cy.contains('button', 'Kirim')
         .click()
 
@@ -28,12 +32,12 @@ describe('Pelamar Staff', () => {
       .click()  
 
   // isi form cv online
-  cy.get('#nama_input').type('George Automatictest')
+  cy.get('#nama_input').type(applicant.nama)
     cy.get('#radioL').check({ force: true })
-    cy.get('#no_hp1').type('087644310987')
-    cy.get('#email').type('george@automatictesting.com')
-    
-    const tanggallahir = 'June 1, 2000'
+    cy.get('#no_hp1').type(applicant.noHp)
+    cy.get('#email').type(applicant.email)
+
+    const tanggallahir = applicant.tanggalLahir
 
     cy.get('#tanggal_lahir_input').click()
     cy.get('.flatpickr-monthDropdown-months')
@@ -43,40 +47,42 @@ describe('Pelamar Staff', () => {
       .type('2000')
     cy.get(`.flatpickr-day[aria-label="${tanggallahir}"]`)
       .click()
-    cy.get('#height').type('170')
-    cy.get('#weight').type('70')
+    cy.get('#height').type(applicant.tinggi)
+    cy.get('#weight').type(applicant.berat)
 
     //alamat KTP
-    cy.get('#provinsi').select('DKI JAKARTA')
-    cy.get('#kota').select('KOTA ADM. JAKARTA BARAT')
-    cy.get('#kecamatan').select('Kalideres')
-    cy.get('#kelurahan').select('PEGADUNGAN')
-    cy.get('#jalan').type('Jl. Testing Alamat No. 123')
+    cy.get('#provinsi').select(applicant.provinsi)
+    cy.get('#kota').select(applicant.kota)
+    cy.get('#kecamatan').select(applicant.kecamatan)
+    cy.get('#kelurahan').select(applicant.kelurahan)
+    cy.get('#jalan').type(applicant.jalan)
 
     //alamat domisili sama dengan KTP
     cy.get('#checkbox_alamat').check({ force: true })
 
-    cy.get('#agama').select('Kristen')
+    cy.get('#agama').select(applicant.agama)
     cy.get('#selectTribe')
       .parent()
       .find('.select2-selection')
       .scrollIntoView()
       .click({ force: true })
-    cy.get('.select2-container--open .select2-search__field').type('Sunda')
-    cy.contains('.select2-container--open .select2-results__option', 'Sunda')
+    cy.get('.select2-container--open .select2-search__field').type(applicant.suku)
+    cy.contains('.select2-container--open .select2-results__option',  applicant.suku
+
+    )
       .click({ force: true })
     cy.get('#maritalY').check({ force: true })
 
     //pendidikan
-    cy.get('#pendidikan').select('SMA/SMK')
+    cy.get('#pendidikan').select(applicant.pendidikan)
     cy.get('#selectInstitusi')
       .parent()
       .find('.select2-selection')
       .scrollIntoView()
       .click({ force: true })
     cy.get('.select2-container--open .select2-search__field')
-      .type('Universitas Indonesia')
-    cy.contains('.select2-container--open .select2-results__option', 'Universitas Indonesia')
+      .type(applicant.institusi)
+    cy.contains('.select2-container--open .select2-results__option', applicant.institusi)
       .click({ force: true })
 
     cy.get('#selectProgramStudi')
@@ -85,11 +91,11 @@ describe('Pelamar Staff', () => {
       .scrollIntoView()
       .click({ force: true })
     cy.get('.select2-container--open .select2-search__field')
-      .type('IPA')
-    cy.contains('.select2-container--open .select2-results__option', 'IPA')
+      .type(applicant.programStudi)
+    cy.contains('.select2-container--open .select2-results__option', applicant.programStudi)
       .click({ force: true })
 
-    cy.get('#lulus').select('2018')
+    cy.get('#lulus').select(applicant.tahunLulus)
 
     cy.get('#pernah_psikotestY').check({ force: true })
 
@@ -108,4 +114,5 @@ describe('Pelamar Staff', () => {
 
     cy.screenshot()
   })
+})
 })

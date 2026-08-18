@@ -1,0 +1,42 @@
+{
+  "firstNames": [
+    "George",
+    "John",
+    "Michael",
+    "David",
+    "William",
+    "Robert",
+    "James",
+    "Daniel",
+    "Thomas",
+    "Andrew"
+  ],
+  "lastNames": [
+    "Anderson",
+    "Baker",
+    "Carter",
+    "Davis",
+    "Evans",
+    "Foster",
+    "Garcia",
+    "Harris",
+    "Irwin",
+    "Johnson"
+  ],
+  "defaultData": {
+    "tanggalLahir": "June 1, 2000",
+    "tinggi": "170",
+    "berat": "70",
+    "provinsi": "DKI JAKARTA",
+    "kota": "KOTA ADM. JAKARTA BARAT",
+    "kecamatan": "Kalideres",
+    "kelurahan": "PEGADUNGAN",
+    "jalan": "Jl. Testing Alamat No. 123",
+    "agama": "Kristen",
+    "suku": "Sunda",
+    "pendidikan": "SMA/SMK",
+    "institusi": "Universitas Indonesia",
+    "programStudi": "IPA",
+    "tahunLulus": "2018"
+  }
+}
